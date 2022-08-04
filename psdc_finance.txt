@@ -1,0 +1,171 @@
+=======================================================================================
+REGRISTER
+
+  make a html '/regrister' page
+    -use layout.html to set up
+    -use jinja templating
+    -make a form element
+      -make 2 input fields to get 2 inputs (username and password)
+
+  in app.py
+    validate if inputs to check if they are empty
+
+  *extra features: password requirements
+    -password at least 8 characters, 1 letter, 1 number, 1 uppercase
+
+    -use js event listeners to change inner html <p> to display something on user input
+
+
+=======================================================================================
+QUOTE
+  -create a 'quote.html' file where there is a input box and a submit button
+    -*name of input box = "symbol"
+    -use lookup function to get stock details in a dictionary
+
+  -create a 'quoted.html' file to display quoted symbol
+    -make a table to display values from lookup function (name, price, symbol)
+
+
+  * TO DO *
+  -Center the table for quoted.html
+
+=======================================================================================
+BUY
+
+  -get stock symbol input
+  -get share quantity input
+
+  -use lookup function with stock symbol input to see if it's valid
+  -check share quantity input to see if it is positive integer
+
+  -if individual does not have enough cash, return 'insufficient cash'
+
+
+  -create a SQL table for TRANSACTIONS with the following fields:
+
+CREATE TABLE transactions (
+    transaction_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    person_id INTEGER NOT NULL,
+    datetime TIMESTAMP NOT NULL,          (YYYY-MM-DD HH:MI:SS)      !try timestamp!!!
+    trade TEXT NOT NULL,                 (buy/sell)
+    stock_name TEXT NOT NULL,
+    stock_symbol TEXT NOT NULL,
+    stock_price NUMERIC NOT NULL,
+    quantity_traded INTEGER NOT NULL,
+    total_amount NUMERIC NOT NULL,
+    FOREIGN KEY (person_id) REFERENCES users (id)
+);
+
+  -create a SQL table for HOLDINGS with the following fields:
+
+CREATE TABLE holdings (
+    person_id INTEGER NOT NULL,
+    stock_name TEXT NOT NULL,
+    stock_symbol TEXT NOT NULL,
+    holding_qty INTEGER DEFAULT 0,
+    FOREIGN KEY (person_id) REFERENCES users (id)
+);
+
+
+  -If user has enough cash, execute the transaction and store some data in transaction:
+    -person_id
+    -date & time
+    -trade (buy)
+    -stock name
+    -stock symbol
+    -stock price
+    -quantity traded
+    -total cost of purchase
+
+  -edit cash in 'users' table
+
+  -edit stock holding (quantity) in 'holdings' table
+    -if user has the prticular stock being bought....
+    -if user does not have the prticular stock being bought....
+
+
+=======================================================================================
+INDEX
+
+  Display a HTML table with the following info
+    -which stock the user owns
+    -number of shares held
+    -price of each stock
+    -total value of each stock
+
+    -current cash balance
+    -stock's total value + cash
+
+Add 2 new fields into each dictionary:
+  -price of each stock (must be queried using 'lookup' function)
+  -total value of each stock (must be calculated)
+
+for loop to go into every dictionary (each dict is a stock)
+  in html for index, use jinja templating
+    For each item in list
+      {% for ___ in ____ %}
+
+      {% endfor %}
+
+=======================================================================================
+SELL
+
+  Needs 3 things
+  'Select' drop-down menu  | input box for stock quantity | submit button
+
+  for select drop-down menu in HTML, use jinja template
+
+  <select id="symbol_sell" name="symbol">
+    <option disable selected>Stock</option>
+      {% for stock in stocks %}
+        <option> {{ ?? }} </option>
+      {% endfor %}
+    </select>
+
+  ~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  -get input from drop-down mmenu to get stock
+    -check (backend) that individual's response is valid
+
+  -get input for quantity
+    -check that is an integer
+
+  -check that individual has sufficient stock to sell
+
+  ~~~ ACTUALLY SELLING ~~~
+
+  -check stock price (to know how much the price is)
+
+  -update transactions
+  -update cash balance
+  -update holdings
+    -if holding is 0, delete row, redirect back to sell page
+    -else: redirect back to sell page
+
+
+=======================================================================================
+HISTORY
+
+  add the following info on display table
+    -stock symbol
+    -date and time
+    -buy or sell
+    -trade price
+    -qty traded
+    -total amount
+
+
+
+================================================================================
+
+To do:
+
+-change timezone  (done!)
+-allow users to buy/sell shares they already own from 'index' page (done)
+-allow users to add additional cash to their account (done)
+-reset account button (done)
+-Allow users to change their passwords (done)
+-require passwords to have some numbers and letters
+-different pages for transaction history
+
+

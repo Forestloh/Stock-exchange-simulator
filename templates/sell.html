@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Sell
+{% endblock %}
+
+{% block main %}
+
+<div class="section">
+    <h2>Sell stocks</h2>
+        <form action="/sell" method="post">
+            <div class="sell_box">
+            <!-- drop down menu for stock symbol -->
+                <select autofocus id="symbol" name="symbol">
+                    <option disabled selected>Stock</option>
+                    {% for stock in stock_list %}
+                        <option> {{ stock }} </option>
+                    {% endfor %}
+                </select>
+
+            <!-- input stock share quantity -->
+                <input autocomplete="off" autofocus class="form-control mx-auto w-auto sell_qty_input" id="shares" name="shares" placeholder="Share quantity" type="number" min="1">
+                <button class="btn btn-primary sell_btn" type="submit">Sell</button>
+            </div>
+        </form>
+</div>
+
+{% endblock %}

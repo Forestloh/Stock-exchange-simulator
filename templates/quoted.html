@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Quoted
+{% endblock %}
+
+{% block main %}
+
+<div class="section">
+    <!--
+        <h2>Stock details</h2>
+    -->
+    <table>
+        <!-- table headers-->
+        <thead>
+            <tr>
+                <th>Stock name</th>
+                <th>Stock price</th>
+                <th>Stock symbol</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td> {{stock_info["name"] }}</td>
+                <td> {{stock_info["price"] | usd }}</td>
+                <td> {{stock_info["symbol"] }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

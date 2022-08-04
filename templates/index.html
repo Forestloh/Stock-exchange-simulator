@@ -1,0 +1,77 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Homepage
+{% endblock %}
+
+{% block main %}
+
+<div class="section homepage">
+    <h2>Portfolio</h2>
+
+<!-- CURRENT CASH BALANCE + PORTFOLIO VALUE ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <table>
+        <thead>
+            <tr>
+                <th>Portfolio Value</th>
+                <th>Remaining Cash</th>
+                <th>Add Cash</th>
+            </tr>
+        </thead>
+        <tbody>
+                <tr>
+                    <td> {{ portfolio_val | usd  }} </td>
+                    <td> {{ remaining_cash | usd }} </td>
+                    <td>
+                        <form action="/?form=add_cash" method="post">
+                            <input autocomplete="off" autofocus class="mx-auto w-auto addcashinput" id="topup_amt" name="topup_amt" placeholder="Top up amount" type="number" min="1">
+                            <button class="btn btn-primary" type="submit">Top up</button>
+                        </form>
+                    </td>
+                </tr>
+        </tbody>
+    </table>
+
+<!-- TABLE OF STOCKS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <table>
+        <!-- table headers-->
+        <thead>
+            <tr>
+                <th> SN         </th>
+                <th>Stock Symbol</th>
+                <th>Shares Held</th>
+                <th>Stock Price</th>
+                <th>Total Value</th>
+                <th>Buy additional</th>
+                <th>Sell additional</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for stock in stock_holdings %}
+                <tr>
+                    <td> {{ stock["sn"]    }} </td>
+                    <td> {{ stock["stock_symbol"]  }} </td>
+                    <td> {{ stock["holding_qty"]   }} </td>
+                    <td> {{ stock["current_price"] | usd}} </td>
+                    <td> {{ stock["total_value"] | usd }} </td>
+                    <td>
+                        <form action="/?form=buy" method="post">
+                                <input name="symbol_to_buy" type="hidden" value='{{ stock["stock_symbol"] }}'>
+                                <input autocomplete="off" autofocus class="mx-auto w-auto" id="shares" name="shares" placeholder="Share quantity" type="number" min="1">
+                            <button class="btn btn-primary" type="submit">Buy</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="/?form=sell" method="post">
+                                <input name="symbol_to_sell" type="hidden" value='{{ stock["stock_symbol"] }}'>
+                                <input autocomplete="off" autofocus class="mx-auto w-auto" id="shares" name="shares" placeholder="Share quantity" type="number" min="1">
+                            <button class="btn btn-primary" type="submit">Sell</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

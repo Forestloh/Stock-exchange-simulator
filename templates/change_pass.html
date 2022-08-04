@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Change Password
+{% endblock %}
+
+{% block main %}
+    <form action="/change_pass" method="post">
+        <div class="mb-3 chg_pass">
+            <h6> Type old password</h6>
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="old_pass" name="old_pass" placeholder="Current password" type="password">
+        </div>
+        <div class="mb-3 chg_pass">
+            <h6> Type new password</h6>
+            <input class="form-control mx-auto w-auto" id="new_pass" name="new_pass" placeholder="New password" type="password">
+        </div>
+        <div class="mb-3 chg_pass">
+            <h6> Retype new password</h6>
+            <input class="form-control mx-auto w-auto" id="cfm_pass" name="cfm_pass" placeholder="Confirm new password" type="password">
+        </div>
+        <button class="btn btn-primary reset" type="submit">Change Password</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block main %}
+
+<div class="section">
+    <h2>Trasaction History</h2>
+
+    <table>
+        <!-- table headers-->
+        <thead>
+            <tr>
+                <th>S/N</th>
+                <th>Symbol</th>
+                <th>Time</th>
+                <th>Trade</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Trade amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for transaction in transact_hist %}
+                <tr>
+                    <td> {{transaction["sn"]                }} </td>
+                    <td> {{ transaction["stock_symbol"]     }} </td>
+                    <td> {{ transaction["datetime"]         }} </td>
+                    <td> {{ transaction["trade"]            }} </td>
+                    <td> {{ transaction["stock_price"] | usd }} </td>
+                    <td> {{ transaction["quantity_traded"]  }} </td>
+                    <td>{{ transaction["total_amount"] | usd }} </td>
+                    <!-- original
+                    <td>$ {{ transaction["total_amount"] }} </td>
+                    -->
+                </tr>
+            {% endfor %}
+            <!-- <p> Showing first 20</p> -->
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

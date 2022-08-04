@@ -1,0 +1,30 @@
+table {
+    display: table;
+    border-collapse: separate;
+    box-sizing: border-box;
+    text-indent: initial;
+    border-spacing: 15px;
+    border-color: grey;
+    margin: auto;
+}
+
+.chg_pass{
+    margin-bottom: 2rem!important;
+}
+
+.sell_box{
+    display:flex;
+    justify-content:center;
+    margin: 3rem;
+}
+
+.reset {
+    color: #fff;
+    background-color: #d01717;
+    border-color: #d01717;
+}
+
+.sell_qty_input{
+        margin-right: 3rem !important;
+        margin-left: 3rem !important;
+}
